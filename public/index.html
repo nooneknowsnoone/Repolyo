@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>@mythtiannnj portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎸</text></svg>">
+    <meta name="description" content="Personal portfolio of Christian Alcontin Corpez - Vibe Coder & Guitarist">
+    <meta name="author" content="@mythtiannnj">
+    <meta name="keywords" content="portfolio, developer, guitarist, vibe coder, mythtiannnj, christian corpez, mobile legends">
+    <meta property="og:title" content="@mythtiannnj Portfolio">
+    <meta property="og:description" content="Vibe Coder & Guitarist - Clean portfolio with interactive features">
+    <meta property="og:image" content="https://iili.io/qZL1giF.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.4s ease, color 0.3s ease;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --border-light: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-purple: #a855f7;
+            --accent-glow: rgba(59, 130, 246, 0.1);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --glass-border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #0f172a;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border-light: #334155;
+            --accent: #60a5fa;
+            --accent-purple: #c084fc;
+            --accent-glow: rgba(96, 165, 250, 0.15);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: floatOrb 25s ease-in-out infinite;
+        }
+
+        .orb-1 { background: radial-gradient(circle, var(--accent-glow), transparent); top: -20%; left: -20%; }
+        .orb-2 { background: radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent); bottom: -30%; right: -20%; }
+        .orb-3 { background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent); top: 40%; right: -10%; }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(5%, 3%) scale(1.05); }
+            66% { transform: translate(-3%, 5%) scale(0.98); }
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--bg-secondary);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: var(--glass-border);
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-info h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .username {
+            font-size: 1rem;
+            color: var(--accent);
+            background: var(--accent-glow);
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .typing-wrapper {
+            margin: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .typed-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2rem;
+            background-color: var(--accent);
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .bio-text {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Banner */
+        .banner-section {
+            margin-bottom: 2rem;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .banner-image {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: var(--glass-border);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
+            z-index: 100;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1.2rem;
+            border-radius: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: var(--glass-border);
+            transition: all 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card i {
+            font-size: 1.8rem;
+            color: var(--accent);
+            width: 48px;
+            text-align: center;
+        }
+
+        .stat-info h4 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+
+        .stat-info p {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Two Columns */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: var(--glass-border);
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 0.8rem;
+        }
+
+        .detail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            border-bottom: 1px dashed var(--border-light);
+            padding-bottom: 0.6rem;
+        }
+
+        .detail-item i {
+            width: 28px;
+            color: var(--accent);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            min-width: 100px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .detail-value {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Skills */
+        .skills-container {
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-bar-bg {
+            height: 6px;
+            background: var(--border-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-purple));
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        /* SOCIAL ICONS - HIGHLY VISIBLE (Like IOARK APIs) */
+        .social-section {
+            margin: 1.5rem 0;
+        }
+
+        .social-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .social-grid {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.6rem;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Brand colors on hover */
+        .social-link.github:hover { background: #333; color: white; border-color: #333; }
+        .social-link.linkedin:hover { background: #0077b5; color: white; border-color: #0077b5; }
+        .social-link.instagram:hover { background: #e4405f; color: white; border-color: #e4405f; }
+        .social-link.dribbble:hover { background: #ea4c89; color: white; border-color: #ea4c89; }
+        .social-link.youtube:hover { background: #ff0000; color: white; border-color: #ff0000; }
+        .social-link.facebook:hover { background: #1877f2; color: white; border-color: #1877f2; }
+        .social-link.twitch:hover { background: #9146ff; color: white; border-color: #9146ff; }
+        .social-link.tiktok:hover { background: #000; color: #00f2ea; border-color: #000; }
+        .social-link.twitter:hover { background: #1da1f2; color: white; border-color: #1da1f2; }
+
+        .contact-info {
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background: var(--accent-glow);
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.2s;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Quote */
+        .quote-container {
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .quote-text {
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        .refresh-quote {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            margin-top: 0.8rem;
+        }
+
+        .refresh-quote:hover {
+            background: var(--accent-glow);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--bg-secondary);
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            border-left: 3px solid var(--accent);
+            transform: translateX(400px);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+        .toast.show { transform: translateX(0); }
+        
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hidden-popup {
+            display: none !important;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .popup-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 2rem;
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+            animation: popupFadeIn 0.3s ease;
+        }
+
+        @keyframes popupFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .popup-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .popup-card button {
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .two-columns { grid-template-columns: 1fr; }
+            .profile-info h1 { font-size: 1.4rem; }
+            .social-link { width: 48px; height: 48px; font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="animated-bg">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+</div>
+<div class="particles-container" id="particlesContainer"></div>
+
+<div class="container">
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <img class="avatar" src="https://iili.io/qZL1giF.jpg" alt="Christian">
+        <div class="profile-info">
+            <h1>CHRISTIAN ALCONTIN CORPEZ</h1>
+            <div class="username">
+                <i class="fas fa-at"></i> mythtiannnj
+            </div>
+            <div class="typing-wrapper">
+                <span class="typing-label"><i class="fas fa-code"></i> I am a</span>
+                <span class="typed-text" id="typedText"></span>
+                <span class="cursor"></span>
+            </div>
+            <div class="bio-text">
+                <i class="fas fa-music"></i> Developer, Guitarist
+                <span>•</span>
+                <i class="fas fa-laptop-code"></i> Vibe Coder
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner-section">
+        <img class="banner-image" src="https://imgur.com/nu6neGU.gif" alt="Banner">
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-card"><i class="fas fa-clock"></i><div class="stat-info"><h4>Current Time</h4><p id="currentDateTime">--</p></div></div>
+        <div class="stat-card"><i class="fas fa-globe"></i><div class="stat-info"><h4>Your IP</h4><p id="ipAddress">Fetching...</p></div></div>
+        <div class="stat-card"><i class="fas fa-battery-full"></i><div class="stat-info"><h4>Battery</h4><p id="batteryHealth">--</p></div></div>
+        <div class="stat-card"><i class="fas fa-sun"></i><div class="stat-info"><h4>Greeting</h4><p id="greetingMsg">--</p></div></div>
+        <div class="stat-card"><i class="fas fa-laptop"></i><div class="stat-info"><h4>Device</h4><p id="deviceInfo">Loading...</p></div></div>
+    </div>
+
+    <!-- Two Columns -->
+    <div class="two-columns">
+        <!-- Left -->
+        <div class="card">
+            <h3><i class="fas fa-heart"></i> Interests & Hobbies</h3>
+            <div class="detail-list">
+                <div class="detail-item"><i class="fas fa-palette"></i><span class="detail-label">Favorite Color</span><span class="detail-value">N/A</span></div>
+                <div class="detail-item"><i class="fas fa-music"></i><span class="detail-label">Favorite Music</span><span class="detail-value">N/A</span></div>
+                <div class="detail-item"><i class="fas fa-guitar"></i><span class="detail-label">Instrument</span><span class="detail-value">Guitar</span></div>
+                <div class="detail-item"><i class="fas fa-utensils"></i><span class="detail-label">Favorite Food</span><span class="detail-value">N/A</span></div>
+                <div class="detail-item"><i class="fas fa-gamepad"></i><span class="detail-label">Hobby</span><span class="detail-value">Coding, Music & Mobile Legends</span></div>
+                <div class="detail-item"><i class="fas fa-home"></i><span class="detail-label">Address</span><span class="detail-value">N/A</span></div>
+            </div>
+            
+            <h3 style="margin-top: 1.5rem;"><i class="fas fa-chart-simple"></i> Skills</h3>
+            <div class="skills-container">
+                <div class="skill-item"><div class="skill-header"><span>Web Development</span><span>20%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="20"></div></div></div>
+                <div class="skill-item"><div class="skill-header"><span>UI/UX Design</span><span>20%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="20"></div></div></div>
+                <div class="skill-item"><div class="skill-header"><span>JavaScript/React</span><span>20%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="20"></div></div></div>
+                <div class="skill-item"><div class="skill-header"><span>Python/Backend</span><span>20%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="20"></div></div></div>
+            </div>
+        </div>
+
+        <!-- Right -->
+        <div class="card">
+            <h3><i class="fas fa-user"></i> About Me</h3>
+            <div class="detail-list">
+                <div class="detail-item"><i class="fas fa-code"></i><span class="detail-label">Primary Skill</span><span class="detail-value">Vibe Coding</span></div>
+                <div class="detail-item"><i class="fas fa-headphones"></i><span class="detail-label">Music Genre</span><span class="detail-value">Rock / Alternative</span></div>
+                <div class="detail-item"><i class="fas fa-guitar"></i><span class="detail-label">Band Role</span><span class="detail-value">Lead Guitarist</span></div>
+            </div>
+
+            <!-- SOCIAL MEDIA ICONS - HIGHLY VISIBLE -->
+            <div class="social-section">
+                <div class="social-title">
+                    <i class="fas fa-share-alt"></i> CONNECT WITH ME
+                </div>
+                <div class="social-grid" id="socialGrid">
+                    <!-- Icons loaded by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <i class="fas fa-envelope"></i> 
+                <a href="mailto:mythtiannnj@gmail.com">mythtiannnj@gmail.com</a>
+            </div>
+            
+            <button class="share-btn" id="shareProfileBtn">
+                <i class="fas fa-share-alt"></i> Share Profile
+            </button>
+        </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="card">
+        <h3><i class="fas fa-thumbtack"></i> Daily Inspiration</h3>
+        <div class="quote-container">
+            <div class="quote-text" id="quoteText">“Get used to a rough life, for luxury does not last forever.”</div>
+            <div class="quote-author" id="quoteAuthor">— Umar ibn Al-Khattab (R.A)</div>
+        </div>
+        <div style="text-align: right;">
+            <button class="refresh-quote" id="refreshQuoteBtn">
+                <i class="fas fa-sync-alt"></i> New Quote
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-copyright"></i> 2026 CHRISTIAN ALCONTIN CORPEZ • @mythtiannnj • All Rights Reserved
+    </footer>
+</div>
+
+<button class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+</button>
+
+<div id="toast" class="toast">Copied!</div>
+<button class="fab" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+
+<div id="welcomePopup" class="popup-overlay hidden-popup">
+    <div class="popup-card">
+        <i class="fas fa-hand-peace"></i>
+        <h2>Welcome! 👋</h2>
+        <p id="popupGreetingText">Glad to have you here</p>
+        <button id="closePopupBtn">Explore →</button>
+    </div>
+</div>
+
+<script src="/frontend.js"></script>
+</body>
+</html>
