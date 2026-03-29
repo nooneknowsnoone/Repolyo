@@ -1,0 +1,17 @@
+{
+  "name": "mythtiannnj-portfolio",
+  "version": "2.0.0",
+  "description": "Portfolio of CHRISTIAN ALCONTIN CORPEZ - @mythtiannnj",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
